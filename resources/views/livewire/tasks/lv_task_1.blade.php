@@ -133,6 +133,49 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="card-title">Relations 2</h4>
+                    <p>Informasi judul film yang disewa pada tanggal 20 dan 21 Maret 2019</p>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Kode Sewa</th>
+                                <th>Nama Customer</th>
+                                <th>Nama Film</th>
+                                <th>Tanggal Pinjam</th>
+                                <th>Tanggal Kembali</th>
+                                <th>Harga Sewa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <x-tables.loading-state :column-size='6' :target="'setRelationTwos'" />
+                            @forelse ($relation_twos as $rl_two)
+                            <tr wire:key="{{'row-rls-1-'.$rl_two->Kd_Sewa}}">
+                                <td> {{$rl_two->Kd_Sewa}} </td>
+                                <td> {{$rl_two->Nama_Customer}} </td>
+                                <td> {{$rl_two->Judul_Film}} </td>
+                                <td> {{$rl_two->Tgl_Pinjam}} </td>
+                                <td> {{$rl_two->Tgl_Kembali}} </td>
+                                <td> {{$rl_two->Harga_Sewa}} </td>
+                            </tr>
+                            @empty
+                            <x-tables.empty-data :colum-size='6' :target="'setRelationTwos'" />
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" wire:click="setRelationTwos">Show Data</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

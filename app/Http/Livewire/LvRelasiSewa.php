@@ -14,6 +14,8 @@ class LvRelasiSewa extends Component
 {
     public $relation_ones = [];
 
+    public $relation_twos = [];
+
     public function render()
     {
         $customers = Customer::all();
@@ -31,6 +33,17 @@ class LvRelasiSewa extends Component
         ->select('sewas.*', 'cs.Nama AS Nama_Customer', 'fl.Judul AS Judul_Film')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->get();
+    }
+
+    public function setRelationTwos()
+    {
+        $this->relation_twos = Sewa::query()
+        ->select('sewas.*', 'cs.Nama AS Nama_Customer', 'fl.Judul AS Judul_Film')
+        ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
+        ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->where('tgl_pinjam', '=', '2019-03-20')
+        ->orWhere('tgl_pinjam', '=', '2019-03-21')
         ->get();
     }
 
