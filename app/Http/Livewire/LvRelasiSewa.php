@@ -20,6 +20,8 @@ class LvRelasiSewa extends Component
 
     public $relation_fours = [];
 
+    public $relation_fives = [];
+
 
     public function render()
     {
@@ -73,4 +75,13 @@ class LvRelasiSewa extends Component
         ->get();
     }
 
+    public function setRelationFives()
+    {
+        $this->relation_fives =  Sewa::query()
+        ->select('sewas.*', 'cs.Nama AS Nama_Customer','fl.Judul', 'Harga_Sewa', 'cs.Alamat')
+        ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
+        ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->where('Alamat', 'like', '%Depok')
+        ->get();
+    }
 }

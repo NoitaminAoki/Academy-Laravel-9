@@ -218,7 +218,7 @@
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
                     <h4 class="card-title">Relations 4</h4>
-                    <p>Dapatkan informasi judul film dan jenis film yang harga sewanya paling tinggi!</p>
+                    <p>Informasi judul film dan jenis film yang harga sewanya paling tinggi!</p>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -245,6 +245,45 @@
                 </div>
                 <div class="card-footer text-end">
                     <button class="btn btn-primary" wire:click="setRelationFours">Show Data</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="card-title">Relations 5</h4>
+                    <p>Informasi nama customer, judul film dan harga sewa untuk customer yang tinggal di kota Depok</p>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nama Customer</th>
+                                <th>Nama Film</th>
+                                <th>Harga Sewa</th>
+                                <th>Alamat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <x-tables.loading-state :column-size='6' :target="'setRelationFives'" />
+                            @forelse ($relation_fives as $rl_fives)
+                            <tr wire:key="{{'row-rls-3-'.$rl_fives->Kd_Sewa}}">
+                                <td> {{$rl_fives->Nama_Customer}} </td>
+                                <td> {{$rl_fives->Judul}} </td>
+                                <td> {{$rl_fives->Harga_Sewa}} </td>
+                                <td> {{$rl_fives->Alamat}} </td>
+                            </tr>
+                            @empty
+                            <x-tables.empty-data :colum-size='6' :target="'setRelationFives'" />
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" wire:click="setRelationFives">Show Data</button>
                 </div>
             </div>
         </div>
