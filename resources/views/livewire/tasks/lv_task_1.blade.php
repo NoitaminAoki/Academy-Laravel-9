@@ -154,7 +154,7 @@
                         <tbody>
                             <x-tables.loading-state :column-size='6' :target="'setRelationTwos'" />
                             @forelse ($relation_twos as $rl_two)
-                            <tr wire:key="{{'row-rls-1-'.$rl_two->Kd_Sewa}}">
+                            <tr wire:key="{{'row-rls-2-'.$rl_two->Kd_Sewa}}">
                                 <td> {{$rl_two->Judul_Film}} </td>
                                 <td> {{$rl_two->Tgl_Pinjam}} </td>
                                 <td> {{$rl_two->Tgl_Kembali}} </td>
@@ -167,6 +167,47 @@
                 </div>
                 <div class="card-footer text-end">
                     <button class="btn btn-primary" wire:click="setRelationTwos">Show Data</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="card-title">Relations 3</h4>
+                    <p>Informasi nama dan alamat customer yang menyewa pada tanggal 24 dan 25 
+                        Maret 2019
+                    </p>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nama Customer</th>
+                                <th>Alamat Customer</th>
+                                <th>Tanggal Pinjam</th>
+                                <th>Tanggal Kembali</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <x-tables.loading-state :column-size='6' :target="'setRelationThrees'" />
+                            @forelse ($relation_threes as $rl_three)
+                            <tr wire:key="{{'row-rls-3-'.$rl_three->Kd_Sewa}}">
+                                <td> {{$rl_three->Nama_Customer}} </td>
+                                <td> {{$rl_three->Alamat}} </td>
+                                <td> {{$rl_three->Tgl_Pinjam}} </td>
+                                <td> {{$rl_three->Tgl_Kembali}} </td>
+                            </tr>
+                            @empty
+                            <x-tables.empty-data :colum-size='6' :target="'setRelationThrees'" />
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" wire:click="setRelationThrees">Show Data</button>
                 </div>
             </div>
         </div>

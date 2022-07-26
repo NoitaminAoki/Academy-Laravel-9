@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 use App\Models\{
     Customer,
     Sewa,
@@ -15,6 +15,9 @@ class LvRelasiSewa extends Component
     public $relation_ones = [];
 
     public $relation_twos = [];
+
+    public $relation_threes = [];
+
 
     public function render()
     {
@@ -47,5 +50,15 @@ class LvRelasiSewa extends Component
         ->get();
     }
 
+    public function setRelationThrees()
+    {
+        $this->relation_threes =  Sewa::query()
+        ->select('sewas.*', 'cs.Nama AS Nama_Customer', 'fl.Judul AS Judul_Film', 'cs.Alamat')
+        ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
+        ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->where('tgl_pinjam', '=', '2019-03-24')
+        ->orWhere('tgl_pinjam', '=', '2019-03-25')
+        ->get();
+    }
 
 }
