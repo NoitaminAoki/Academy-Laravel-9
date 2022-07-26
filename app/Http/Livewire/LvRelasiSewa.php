@@ -22,6 +22,8 @@ class LvRelasiSewa extends Component
 
     public $relation_fives = [];
 
+    public $relation_sixs = [];
+
 
     public function render()
     {
@@ -82,6 +84,16 @@ class LvRelasiSewa extends Component
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
         ->where('Alamat', 'like', '%Depok')
+        ->get();
+    }
+
+    public function setRelationSixs()
+    {
+        $this->relation_sixs =  Sewa::query()
+        ->select('sewas.*', 'cs.Nama AS Nama_Customer','cs.Alamat', 'fl.Judul', 'cs.Jenis_Identitas')
+        ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
+        ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->where('Jenis_Identitas', '=', 'SIM')
         ->get();
     }
 }

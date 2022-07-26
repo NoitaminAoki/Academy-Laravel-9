@@ -287,6 +287,45 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="card-title">Relations 6</h4>
+                    <p>Informasi dari nama, alamat customer dan judul film saat menyewa menggunakan identitas berupa SIM</p>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nama Customer</th>
+                                <th>Alamat</th>
+                                <th>Nama Film</th>
+                                <th>Jenis Identitas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <x-tables.loading-state :column-size='6' :target="'setRelationSixs'" />
+                            @forelse ($relation_sixs as $rl_sixs)
+                            <tr wire:key="{{'row-rls-3-'.$rl_sixs->Kd_Sewa}}">
+                                <td> {{$rl_sixs->Nama_Customer}} </td>
+                                <td> {{$rl_sixs->Alamat}} </td>
+                                <td> {{$rl_sixs->Judul}} </td>
+                                <td> {{$rl_sixs->Jenis_Identitas}} </td>
+                            </tr>
+                            @empty
+                            <x-tables.empty-data :colum-size='6' :target="'setRelationSixs'" />
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" wire:click="setRelationSixs">Show Data</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
