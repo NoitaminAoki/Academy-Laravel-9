@@ -18,6 +18,8 @@ class LvRelasiSewa extends Component
 
     public $relation_threes = [];
 
+    public $relation_fours = [];
+
 
     public function render()
     {
@@ -42,7 +44,7 @@ class LvRelasiSewa extends Component
     public function setRelationTwos()
     {
         $this->relation_twos = Sewa::query()
-        ->select('sewas.*', 'cs.Nama AS Nama_Customer', 'fl.Judul AS Judul_Film')
+        ->select('sewas.*', 'fl.Judul AS Judul_Film')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
         ->where('tgl_pinjam', '=', '2019-03-20')
@@ -53,11 +55,21 @@ class LvRelasiSewa extends Component
     public function setRelationThrees()
     {
         $this->relation_threes =  Sewa::query()
-        ->select('sewas.*', 'cs.Nama AS Nama_Customer', 'fl.Judul AS Judul_Film', 'cs.Alamat')
+        ->select('sewas.*', 'cs.Nama AS Nama_Customer','cs.Alamat')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
         ->where('tgl_pinjam', '=', '2019-03-24')
         ->orWhere('tgl_pinjam', '=', '2019-03-25')
+        ->get();
+    }
+
+    public function setRelationFours()
+    {
+        $this->relation_fours =  Sewa::query()
+        ->select('sewas.*', 'fl.Jenis','fl.Judul', 'Harga_Sewa')
+        ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
+        ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->where('Harga_Sewa', '>=', '25000')
         ->get();
     }
 

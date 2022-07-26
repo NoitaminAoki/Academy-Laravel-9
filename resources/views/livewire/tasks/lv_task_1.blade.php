@@ -211,6 +211,43 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="card-title">Relations 4</h4>
+                    <p>Dapatkan informasi judul film dan jenis film yang harga sewanya paling tinggi!</p>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nama Film</th>
+                                <th>Jenis Film</th>
+                                <th>Harga Sewa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <x-tables.loading-state :column-size='6' :target="'setRelationFours'" />
+                            @forelse ($relation_fours as $rl_fours)
+                            <tr wire:key="{{'row-rls-3-'.$rl_fours->Kd_Sewa}}">
+                                <td> {{$rl_fours->Judul}} </td>
+                                <td> {{$rl_fours->Jenis}} </td>
+                                <td> {{$rl_fours->Harga_Sewa}} </td>
+                            </tr>
+                            @empty
+                            <x-tables.empty-data :colum-size='6' :target="'setRelationFours'" />
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" wire:click="setRelationFours">Show Data</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
