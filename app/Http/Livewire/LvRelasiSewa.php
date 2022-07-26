@@ -69,7 +69,7 @@ class LvRelasiSewa extends Component
         ->select('sewas.*', 'fl.Jenis','fl.Judul', 'Harga_Sewa')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
-        ->where('Harga_Sewa', '>=', '25000')
+        ->whereBetween('Harga_Sewa', [25000, 100000])
         ->get();
     }
 
