@@ -365,6 +365,47 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="card-title">Relations 9</h4>
+                    <p>Seluruh informasi customer yang mengembalikan film antara tanggal 25 s.d. 28 Maret 2019</p>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No Identitas</th>
+                                <th>Jenis Identitas</th>
+                                <th>Nama Customer</th>
+                                <th>Alamat</th>
+                                <th>Tanggal Kembali</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <x-tables.loading-state :column-size='6' :target="'setRelationNines'" />
+                            @forelse ($relation_nines as $rl_nines)
+                            <tr wire:key="{{'row-rls-3-'.$rl_nines->Kd_Sewa}}">
+                                <td> {{$rl_nines->No_Identitas}} </td>
+                                <td> {{$rl_nines->Jenis_Identitas}} </td>
+                                <td> {{$rl_nines->Nama_Customer}} </td>
+                                <td> {{$rl_nines->Alamat}} </td>
+                                <td> {{$rl_nines->Tgl_Kembali}} </td>
+                            </tr>
+                            @empty
+                            <x-tables.empty-data :colum-size='6' :target="'setRelationNines'" />
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" wire:click="setRelationNines">Show Data</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

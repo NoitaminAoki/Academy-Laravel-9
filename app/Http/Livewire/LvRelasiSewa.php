@@ -26,6 +26,8 @@ class LvRelasiSewa extends Component
 
     public $relation_eights = [];
 
+    public $relation_nines = [];
+
 
     public function render()
     {
@@ -111,11 +113,14 @@ class LvRelasiSewa extends Component
 
     public function setRelationNines()
     {
+        $from = date('2019-03-25');
+        $to = date('2019-03-28');
+
         $this->relation_nines =  Sewa::query()
-        ->select('sewas.*', 'cs.Nama AS Nama_Customer','cs.Alamat', 'fl.Judul', 'cs.Jenis_Identitas')
+        ->select('sewas.*', 'cs.No_Identitas', 'cs.Jenis_Identitas', 'cs.Nama AS Nama_Customer', 'cs.Alamat')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
-        ->whereDay('Tgl_Kembali',)
+        ->whereBetween('Tgl_Kembali', [$from, $to])
         ->get();
     }
 }
