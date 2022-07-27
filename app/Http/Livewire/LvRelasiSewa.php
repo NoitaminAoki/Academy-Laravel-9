@@ -24,6 +24,8 @@ class LvRelasiSewa extends Component
 
     public $relation_sixs = [];
 
+    public $relation_sevens = [];
+
     public $relation_eights = [];
 
     public $relation_nines = [];
@@ -62,7 +64,7 @@ class LvRelasiSewa extends Component
 
     public function setRelationThrees()
     {
-        $this->relation_threes =  Sewa::query()
+        $this->relation_threes = Sewa::query()
         ->select('sewas.*', 'cs.Nama AS Nama_Customer','cs.Alamat')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
@@ -73,7 +75,7 @@ class LvRelasiSewa extends Component
 
     public function setRelationFours()
     {
-        $this->relation_fours =  Sewa::query()
+        $this->relation_fours = Sewa::query()
         ->select('sewas.*', 'fl.Jenis','fl.Judul', 'Harga_Sewa')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
@@ -83,7 +85,7 @@ class LvRelasiSewa extends Component
 
     public function setRelationFives()
     {
-        $this->relation_fives =  Sewa::query()
+        $this->relation_fives = Sewa::query()
         ->select('sewas.*', 'cs.Nama AS Nama_Customer','fl.Judul', 'Harga_Sewa', 'cs.Alamat')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
@@ -101,9 +103,29 @@ class LvRelasiSewa extends Component
         ->get();
     }
 
+    
+    public function setRelationSevens()
+    {
+        $this->relation_sevens = Sewa::query()
+        ->select('sewas.*', 'cs.Nama AS Nama_Customer' )
+        ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
+        ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->groupBy('sewas.Kd_Sewa')
+        ->havingRaw('count(*) = 2')
+        ->get();
+
+        $this->itung_film = Sewa::query()
+        ->select('sewas.*', 'cs.Nama AS Nama_Customer' )
+        ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
+        ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->groupBy('sewas.Kd_Sewa')
+        ->havingRaw('count(*) > 1')
+        ->count();
+    }
+
     public function setRelationEights()
     {
-        $this->relation_eights =  Sewa::query()
+        $this->relation_eights = Sewa::query()
         ->select('sewas.*', 'cs.Nama AS Nama_Customer','cs.Alamat', 'fl.Judul', 'cs.Jenis_Identitas')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
@@ -116,7 +138,7 @@ class LvRelasiSewa extends Component
         $from = date('2019-03-25');
         $to = date('2019-03-28');
 
-        $this->relation_nines =  Sewa::query()
+        $this->relation_nines = Sewa::query()
         ->select('sewas.*', 'cs.No_Identitas', 'cs.Jenis_Identitas', 'cs.Nama AS Nama_Customer', 'cs.Alamat')
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')

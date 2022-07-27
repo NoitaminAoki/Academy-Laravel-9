@@ -332,6 +332,43 @@
         <div class="col-md-12 mb-4">
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
+                    <h4 class="card-title">Relations 7</h4>
+                    <p>Informasi dari nama customer, kode sewa dan jumlah sewa dari masing - masing kode sewa untuk customer yang menyewa 2 film</p>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nama Customer</th>
+                                <th>Kode Sewa</th>
+                                <th>Jumlah Sewa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <x-tables.loading-state :column-size='6' :target="'setRelationSevens'" />
+                            @forelse ($relation_sevens as $rl_sevens)
+                            <tr wire:key="{{'row-rls-3-'.$rl_sevens->Kd_Sewa}}">
+                                <td> {{$rl_sevens->Nama_Customer}} </td>
+                                <td> {{$rl_sevens->Kd_Sewa}} </td>
+                                <td> {{$itung_film}} </td>
+                            </tr>
+                            @empty
+                            <x-tables.empty-data :colum-size='6' :target="'setRelationSevens'" />
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" wire:click="setRelationSevens">Show Data</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
                     <h4 class="card-title">Relations 8</h4>
                     <p>Informasi dari nama, alamat customer dan judul film saat menyewa menggunakan identitas berupa KTP</p>
                 </div>
