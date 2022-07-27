@@ -24,6 +24,8 @@ class LvRelasiSewa extends Component
 
     public $relation_sixs = [];
 
+    public $relation_eights = [];
+
 
     public function render()
     {
@@ -94,6 +96,26 @@ class LvRelasiSewa extends Component
         ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
         ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
         ->where('Jenis_Identitas', '=', 'SIM')
+        ->get();
+    }
+
+    public function setRelationEights()
+    {
+        $this->relation_eights =  Sewa::query()
+        ->select('sewas.*', 'cs.Nama AS Nama_Customer','cs.Alamat', 'fl.Judul', 'cs.Jenis_Identitas')
+        ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
+        ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->where('Jenis_Identitas', '=', 'KTP')
+        ->get();
+    }
+
+    public function setRelationNines()
+    {
+        $this->relation_nines =  Sewa::query()
+        ->select('sewas.*', 'cs.Nama AS Nama_Customer','cs.Alamat', 'fl.Judul', 'cs.Jenis_Identitas')
+        ->join('customers AS cs', 'cs.No_Identitas', 'sewas.No_Identitas')
+        ->join('films AS fl', 'fl.Kd_Film', 'sewas.Kd_Film')
+        ->whereDay('Tgl_Kembali',)
         ->get();
     }
 }
