@@ -29,4 +29,16 @@ class Film extends Model
      * @var string
      */
     public $keyType = 'string';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'Kd_Film',
+        'Jenis',
+        'Judul',
+        'Jml_Keping',
+    ];
 }
