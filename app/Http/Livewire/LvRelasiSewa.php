@@ -121,6 +121,16 @@ class LvRelasiSewa extends Component
         ->groupBy('sewas.Kd_Sewa')
         ->havingRaw('count(*) > 1')
         ->count();
+
+        /* Salah ya, cukup satu query saja dan tidak perlu mengganti config database-nya.
+        * Untuk groupby, harus memasukkan semua field yang ditampilkan pada select.
+        *
+        * Query yang benar:
+        * SELECT cus.Nama, sw.Kd_Sewa, COUNT(sw.Kd_Sewa) as Jumlah_Sewa FROM Sewa AS sw
+        * LEFT JOIN Customer AS cus ON cus.No_Identitas = sw.No_Identitas
+        * GROUP BY cus.Nama, sw.Kd_Sewa
+        * HAVING Jumlah_Sewa = 2;
+        */
     }
 
     public function setRelationEights()
