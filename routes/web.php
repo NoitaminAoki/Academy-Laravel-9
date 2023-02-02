@@ -18,3 +18,13 @@ Route::get('/', function () {
 });
 
 Route::get('sewa', App\Http\Livewire\LvRelasiSewa::class)->name('lv.sewa.index');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
